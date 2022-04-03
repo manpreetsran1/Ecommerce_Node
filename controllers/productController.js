@@ -17,9 +17,8 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
 //get all products
 
-exports.getAllProducts = catchAsyncErrors(async (req, res) => {
+exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const resultPerPage = 5;
-
   const productCount = await Product.countDocuments();
 
   const apiFeature = new ApiFeatures(Product.find(), req.query)
@@ -41,7 +40,7 @@ exports.getProductDetail = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.find({ _id: req.params.id });
   console.log(product, "product");
   if (product && product.length > 0) {
-    console.log("ifff", "product");
+    // console.log("ifff", "product");
 
     return res.status(200).json({
       success: true,
